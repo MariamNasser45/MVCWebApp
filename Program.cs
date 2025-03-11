@@ -17,6 +17,28 @@ builder.Services.AddIdentity<User, IdentityRole>()
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+using var scope = builder.Services.BuildServiceProvider().CreateScope();//////
+var services = scope.ServiceProvider;
+
+var loggerFactory = services.GetRequiredService<ILoggerProvider>();
+var logger = loggerFactory.CreateLogger("app");
+
+try
+{
+    var userManager = services.GetRequiredService<UserManager<User>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await MVCWebApp.Seeds.DefaultRoles.SeedRoles(roleManager);
+    await MVCWebApp.Seeds.DefaultUsers.SeedUser(userManager, roleManager);
+    await MVCWebApp.Seeds.DefaultUsers.SeedAdmin(userManager, roleManager);
+
+    logger.LogInformation("Data Seeded");
+}
+catch
+{
+    logger.LogInformation("Erroe Occure While Seeding Data");
+}
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
