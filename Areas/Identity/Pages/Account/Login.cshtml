@@ -14,7 +14,7 @@
     </div>
 
     <div class="row w-auto">
-        <div class="col-12">
+        <div class="col-12 d-flex justify-content-center">
             <section>
                 <form id="account" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -28,8 +28,8 @@
                         <input asp-for="Input.Password" class="form-control w-100" autocomplete="current-password" aria-required="true" placeholder="password" />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div>
-                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn btn-outline-dark">Log in</button>
+                    <div class="d-flex  justify-content-center">
+                        <button id="login-submit" type="submit" class="w-50 btn btn-lg btn btn-outline-dark">Log in</button>
                     </div>
                 </form>
             </section>
