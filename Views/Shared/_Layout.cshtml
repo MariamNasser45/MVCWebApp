@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ProductCatalog</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProductCatalog.styles.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -15,8 +19,9 @@
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Product Catalog</a>
                 <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Privacy">Products</a>
                 <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Index">Admin As Client</a>
-         
-            <partial name="_LoginPartial" />
+
+                <partial name="_LoginPartial"/>
+
             </div>
         </nav>
     </header>
