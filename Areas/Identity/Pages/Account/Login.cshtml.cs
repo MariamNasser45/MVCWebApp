@@ -125,6 +125,7 @@ namespace ProductCatalog.Areas.Identity.Pages.Account
                 else
                 {
                      ModelState.AddModelError(string.Empty, "Incorrect Username Or Password");
+                    return Page();
                 }
                 //if (result.RequiresTwoFactor)
                 //{
