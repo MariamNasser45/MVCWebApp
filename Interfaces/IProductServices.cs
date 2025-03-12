@@ -1,6 +1,6 @@
-﻿using MVCWebApp.Models;
+﻿using ProductCatalog.Models;
 
-namespace MVCWebApp.Interfaces
+namespace ProductCatalog.Interfaces
 {
     public interface IProductServices : IBaseRepository<Product>
     {

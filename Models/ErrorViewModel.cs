@@ -1,4 +1,4 @@
-namespace MVCWebApp.Models
+namespace ProductCatalog.Models
 {
     public class ErrorViewModel
     {

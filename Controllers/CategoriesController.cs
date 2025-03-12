@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MVCWebApp.Controllers
+namespace ProductCatalog.Controllers
 {
     public class CategoriesController : Controller
     {

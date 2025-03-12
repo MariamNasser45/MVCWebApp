@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace MVCWebApp.Migrations
+namespace ProductCatalog.Migrations
 {
     /// <inheritdoc />
     public partial class AddProductAndCategoryModels : Migration

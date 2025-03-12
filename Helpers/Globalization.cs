@@ -1,2 +1,2 @@
-﻿global using MVCWebApp.Models;
+﻿global using ProductCatalog.Models;
 

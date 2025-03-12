@@ -1,7 +1,7 @@
-﻿using MVCWebApp.Data;
-using MVCWebApp.Interfaces;
+﻿using ProductCatalog.Data;
+using ProductCatalog.Interfaces;
 
-namespace MVCWebApp.Services
+namespace ProductCatalog.Services
 {
     public class UnitOfWork : IUnitOfWork
     {

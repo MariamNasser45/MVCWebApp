@@ -1,4 +1,4 @@
-﻿namespace MVCWebApp.Interfaces
+﻿namespace ProductCatalog.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {

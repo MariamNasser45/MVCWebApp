@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MVCWebApp.Data;
-using MVCWebApp.Models;
+using ProductCatalog.Data;
+using ProductCatalog.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +11,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(
     option => option.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 using var scope = builder.Services.BuildServiceProvider().CreateScope();//////
 var services = scope.ServiceProvider;
@@ -28,9 +31,9 @@ try
     var userManager = services.GetRequiredService<UserManager<User>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-    await MVCWebApp.Seeds.DefaultRoles.SeedRoles(roleManager);
-    await MVCWebApp.Seeds.DefaultUsers.SeedUser(userManager, roleManager);
-    await MVCWebApp.Seeds.DefaultUsers.SeedAdmin(userManager, roleManager);
+    await ProductCatalog.Seeds.DefaultRoles.SeedRoles(roleManager);
+    await ProductCatalog.Seeds.DefaultUsers.SeedUser(userManager, roleManager);
+    await ProductCatalog.Seeds.DefaultUsers.SeedAdmin(userManager, roleManager);
 
     logger.LogInformation("Data Seeded");
 }

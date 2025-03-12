@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MVCWebApp.Data;
-using MVCWebApp.Interfaces;
+using ProductCatalog.Data;
+using ProductCatalog.Interfaces;
 
-namespace MVCWebApp.Services
+namespace ProductCatalog.Services
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {

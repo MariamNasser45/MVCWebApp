@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MVCWebApp.Migrations
+namespace ProductCatalog.Migrations
 {
     /// <inheritdoc />
     public partial class AddPropertiesInUsersModel : Migration

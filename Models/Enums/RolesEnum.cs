@@ -1,4 +1,4 @@
-﻿namespace MVCWebApp.Models.Enums
+﻿namespace ProductCatalog.Models.Enums
 {
     public enum RolesEnum
     {

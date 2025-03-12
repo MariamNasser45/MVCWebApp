@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MVCWebApp.Models;
-using MVCWebApp.Models.Enums;
+using ProductCatalog.Models;
+using ProductCatalog.Models.Enums;
 
-namespace MVCWebApp.Seeds
+namespace ProductCatalog.Seeds
 {
     public class DefaultUsers
     {

@@ -1,8 +1,8 @@
-﻿using MVCWebApp.Data;
-using MVCWebApp.Interfaces;
-using MVCWebApp.Models;
+﻿using ProductCatalog.Data;
+using ProductCatalog.Interfaces;
+using ProductCatalog.Models;
 
-namespace MVCWebApp.Services
+namespace ProductCatalog.Services
 {
     public class ProductServices : BaseRepository<Product> , IProductServices
     {

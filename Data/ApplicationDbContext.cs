@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MVCWebApp.Models;
+using ProductCatalog.Models;
 
-namespace MVCWebApp.Data
+namespace ProductCatalog.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

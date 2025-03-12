@@ -1,6 +1,6 @@
-﻿using MVCWebApp.Data;
+﻿using ProductCatalog.Data;
 
-namespace MVCWebApp.Interfaces
+namespace ProductCatalog.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

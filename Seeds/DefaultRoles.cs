@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MVCWebApp.Data;
+using ProductCatalog.Data;
 
-namespace MVCWebApp.Seeds
+namespace ProductCatalog.Seeds
 {
     public static class DefaultRoles
     {
