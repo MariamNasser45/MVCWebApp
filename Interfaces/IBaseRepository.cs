@@ -4,7 +4,7 @@
     {
         Task<T> Add(T entity);
         Task<T> Update(T entity);
-        Task<T> Delete(T entity);
+        Task<string> Delete(T entity);
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> GetAllWithData();
         Task<T> FindById(int id);

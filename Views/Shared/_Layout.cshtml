@@ -16,17 +16,12 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark text-white hite border-bottom box-shadow mb-3">
             <div class="container d-flex justify-content-around">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Product Catalog</a>
-                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Create">Products</a>
-
+                <a class="btn btn-outline-light" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+               
                 @{
                     if(User.IsInRole("Admin"))
                     {
-                        if(true)
-                        {
-
-                        }
-                       <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Index">Admin As Client</a>
+                        <a class="btn btn-outline-light" asp-area="" asp-controller="Products" asp-action="Index">Admin As Client</a>
                     }
 
                 }

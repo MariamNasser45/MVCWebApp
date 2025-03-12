@@ -19,10 +19,13 @@ namespace ProductCatalog.Services
             return entity;
         }
 
-        public async Task<T> Delete(T entity)
+        public async Task<string> Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
-            return entity;
+            var result = _context.Set<T>().Remove(entity);
+
+            if(result.State == EntityState.Deleted)
+                return string.Empty;
+            return "Failed Delete";
         }
 
         public async Task<T> FindById(int id)
