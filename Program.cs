@@ -27,7 +27,7 @@ var logger = loggerFactory.CreateLogger("app");
 
 try
 {
-    var userManager = services.GetRequiredService<UserManager<User>>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
     await ProductCatalog.Seeds.DefaultRoles.SeedRoles(roleManager);

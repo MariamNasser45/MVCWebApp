@@ -18,7 +18,19 @@
             <div class="container d-flex justify-content-around">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Product Catalog</a>
                 <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Privacy">Products</a>
-                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Index">Admin As Client</a>
+
+                @{
+                    if(User.IsInRole("Admin"))
+                    {
+                        if(true)
+                        {
+
+                        }
+                       <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Index">Admin As Client</a>
+                    }
+
+                }
+
 
                 <partial name="_LoginPartial"/>
 

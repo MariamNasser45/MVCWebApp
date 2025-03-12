@@ -6,13 +6,13 @@ namespace ProductCatalog.Seeds
 {
     public class DefaultUsers
     {
-        public async static Task SeedAdmin(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public async static Task SeedAdmin(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var adminUser = new User
             {
                 FirstName = "Admin",
                 LastName = "Admin",
-                UserName = "Admin",
+                UserName = "Admin@123",
                 Email = "Admin@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "01112425154",
@@ -32,13 +32,13 @@ namespace ProductCatalog.Seeds
             }
         }
 
-        public async static Task SeedUser(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public async static Task SeedUser(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var adminUser = new User
             {
                 FirstName = "User",
                 LastName = "User",
-                UserName = "User",
+                UserName = "User@123",
                 Email = "User@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "01112425154",
