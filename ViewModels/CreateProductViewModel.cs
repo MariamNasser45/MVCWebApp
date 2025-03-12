@@ -1,23 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
-namespace ProductCatalog.Models
+namespace ProductCatalog.ViewModels
 {
-    public class Product
+    public class CreateProductViewModel
     {
-        public int Id { get; set; }
-        
         [Required]
         [Display(Name = "Product Name")]
         public string Name { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Creation Date")]
-        public DateTime CreationDate { get; set; }
-
-        [StringLength(450)]
-        [Display(Name = "Created By")]
-        public string CreatedBy { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -33,7 +23,9 @@ namespace ProductCatalog.Models
         [Range(minimum: 1, maximum: int.MaxValue)]
         public int Price { get; set; }
 
-        public Category? Category { get; set; }
-        public int ? CategoryId { get; set; }
+        public IEnumerable<SelectListItem>? Category { get; set; } = Enumerable.Empty<SelectListItem>();
+
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; } // id for selected category
     }
 }

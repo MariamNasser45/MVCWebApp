@@ -1,0 +1,80 @@
+﻿@model CreateProductViewModel;
+@{
+    ViewData["Title"] = "New Product";
+}
+
+<div class="container d-flex justify-content-center">
+
+    <form class="col-12" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" placeholder="@DateTime.Now.Date" min="@DateOnly.FromDateTime(DateTime.Now).ToString("yyyy-MM-dd")" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Duration" class="control-label"></label>
+                    <input asp-for="Duration" class="form-control" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="form-label"></label>
+                    <select class="form-select" asp-for="CategoryId" asp-items="Model.Category"
+                            data-placeholder="Select a Category" data-minimum-results-for-search="Infinity">
+                        <option value=""></option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mt-3">
+                    <input type="submit" value="Create" class="btn btn-outline-success" />
+                    <a asp-action="Index" class="btn btn-outline-dark ms-lg-2">Back to List</a>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+    
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+
+</div>
