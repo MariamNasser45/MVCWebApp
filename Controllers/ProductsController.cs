@@ -69,10 +69,60 @@ namespace ProductCatalog.Controllers
             {
                 var result = await _unitOfWork.ProductServices.CreateNewProduct(model);
 
-                if (result==string.Empty)
+                if (result == string.Empty)
                     return RedirectToAction(nameof(Index));
                 else
                     return BadRequest(result);
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Update(int productId)
+        {
+            var result = await _unitOfWork.ProductServices.GetProductById(productId);
+
+            if (result.Messege == string.Empty && result.Product != null)
+            {
+
+                UpdateProductViewModel viewModel = new UpdateProductViewModel
+                {
+                    Name = result.Product.Name,
+                    Price = result.Product.Price,
+                    StartDate = result.Product.StartDate,
+                    Duration = result.Product.Duration,
+                    CategoryId = result.Product.CategoryId,
+                    Category = await _unitOfWork.CategoryServices.GetAllCategories(),
+                    Id = result.Product.Id
+
+                };
+                return View(viewModel);
+            }
+
+            return BadRequest(result.Messege);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Update(UpdateProductViewModel viewModel)
+        {
+            if(!ModelState.IsValid)
+            {
+                var categories = await _unitOfWork.CategoryServices.GetAllCategories();
+
+                viewModel.Category = categories;
+
+                return View(viewModel);
+            }
+            else
+            {
+                var result = await _unitOfWork.ProductServices.UpdateProduct(viewModel);
+
+                if (result.Messege == string.Empty)
+                    return RedirectToAction(nameof(Index));
+                else
+                    return BadRequest(result.Messege);
             }
         }
     }

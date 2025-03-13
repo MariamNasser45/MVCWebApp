@@ -35,18 +35,26 @@ namespace ProductCatalog.Services
 
                     if (checkCategory!=null)
                     {
-                        var newProduct = model.Adapt<Product>();
-                        newProduct.CreatedBy = userId;
-                        newProduct.CreationDate = DateTime.Now;
-                        newProduct.Category=checkCategory;
+                        try
+                        {
+                            var newProduct = model.Adapt<Product>();
+                            newProduct.CreatedBy = userId;
+                            newProduct.CreationDate = DateTime.Now;
+                            newProduct.Category = checkCategory;
 
-                        await Add(newProduct);
+                            await Add(newProduct);
 
-                        var count = await CommitChanges();
+                            var count = await CommitChanges();
 
-                        if (count==0)
-                            output = "Error While Saving";
-
+                            if (count == 0)
+                                output = "Error While Saving";
+                        }
+                        catch (Exception ex)
+                        { 
+                            output = ex.Message.ToString();
+                            return output;
+                        }
+                        
                     }
                     else
                         output = "Invalid Category";
@@ -80,15 +88,16 @@ namespace ProductCatalog.Services
                 {
                     var data = new ProductDataViewModel
                     {
+                        Id = item.Id,
                         Name = item.Name,
-                        CategoryId =(int) item.CategoryId,
+                        CategoryId =item.CategoryId,
                         Price =item.Price,
                         CreationDate = item.CreationDate,
                         StartDate = item.StartDate,
                         Duration = item.Duration,
                     };
 
-                    var category = await _unitOfWork.CategoryServices.GetCategoryById((int)item.CategoryId);
+                    var category = await _unitOfWork.CategoryServices.GetCategoryById(item.CategoryId);
 
                     data.CategoryName = category.Name;
                     
@@ -112,8 +121,9 @@ namespace ProductCatalog.Services
                     {
                         var data = new ProductDataViewModel
                         {
+                            Id = item.Id,
                             Name = item.Name,
-                            CategoryId =(int) item.CategoryId,
+                            CategoryId =item.CategoryId,
                             Price =item.Price,
                             CreationDate = item.CreationDate,
                             StartDate = item.StartDate,
@@ -180,18 +190,24 @@ namespace ProductCatalog.Services
             {
                 var data = new ProductDataViewModel
                 {
+                    Id = getProduct.Id,
                     Name = getProduct.Name,
-                    CategoryName = getProduct.Category!=null ? getProduct.Category.Name : "",
-                    CategoryId = getProduct.Category!=null ? getProduct.Category.Id : 0,
-                    Price =getProduct.Price,
+                    CategoryId = getProduct.CategoryId,
+                    Price = getProduct.Price,
                     CreationDate = getProduct.CreationDate,
                     StartDate = getProduct.StartDate,
                     Duration = getProduct.Duration,
                 };
 
+                var category = await _unitOfWork.CategoryServices.GetCategoryById((int)getProduct.CategoryId);
+
+                data.CategoryName = category.Name;
+
                 var cratedByName = await _unitOfWork.UserResolverService.GetUserName(getProduct.CreatedBy);
 
                 data.CreatedBy = cratedByName;
+
+                output.Product = data;
             }
             else
                 output.Messege = "Invalid Product";
@@ -213,16 +229,24 @@ namespace ProductCatalog.Services
 
                     if (getProduct != null)
                     {
-                        var result = await Delete(getProduct);
+                        try
+                        {
+                            var result = await Delete(getProduct);
 
-                        if (result == string.Empty)
-                        {
-                            return string.Empty;
+                            if (result == string.Empty)
+                            {
+                                return string.Empty;
+                            }
+                            else
+                            {
+                                return result;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            return result;
+                            return ex.Message.ToString();
                         }
+                        
                     }
                     else
                         return "Invalid Product";
@@ -235,7 +259,7 @@ namespace ProductCatalog.Services
                 return "Please Login Firstly";
         }
 
-        public async Task<ReturnaProductDataViewModel> UpdateProduct(UpdateProductVieModel model)
+        public async Task<ReturnaProductDataViewModel> UpdateProduct(UpdateProductViewModel model)
         {
             var output = new ReturnaProductDataViewModel();
             var userId = _unitOfWork.UserResolverService.GetUserId();

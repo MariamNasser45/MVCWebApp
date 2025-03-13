@@ -8,7 +8,7 @@ namespace ProductCatalog.Interfaces
         Task<ReturnListOfProductViewModel> GetAllProducts(int? categoryId);
         Task<ReturnaProductDataViewModel> GetProductById(int id);
         Task<string> DeleteProduct(int id);
-        Task<ReturnaProductDataViewModel> UpdateProduct(UpdateProductVieModel model);
+        Task<ReturnaProductDataViewModel> UpdateProduct(UpdateProductViewModel model);
 
     }
 }

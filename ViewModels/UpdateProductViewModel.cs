@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProductCatalog.ViewModels
 {
-    public class UpdateProductVieModel
+    public class UpdateProductViewModel
     {
         public int Id { get; set; }
 
