@@ -235,6 +235,7 @@ namespace ProductCatalog.Services
 
                             if (result == string.Empty)
                             {
+                                await CommitChanges();
                                 return string.Empty;
                             }
                             else

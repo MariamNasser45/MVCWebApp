@@ -140,5 +140,16 @@ namespace ProductCatalog.Controllers
                 return BadRequest(product.Messege);
 
         }
+
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> Delete(int productId)
+        {
+            var result = await _unitOfWork.ProductServices.DeleteProduct(productId);
+
+            if (result == string.Empty)
+                return Ok("Product Deleted Succesfully");
+
+            return BadRequest(result);
+        }
     }
 }

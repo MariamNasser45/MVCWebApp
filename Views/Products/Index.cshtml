@@ -92,7 +92,7 @@
                                 <td>
                                     <a asp-action="Details" asp-route-productId="@item.Id" class="btn btn-outline-info">Details</a>
                                     <a asp-action="Update" asp-route-productId="@item.Id" class="btn btn-outline-warning">Edit</a>
-                                    <a asp-action="Delete" asp-route-productId="@item.Id" class="btn btn-outline-danger">Delete</a>
+                                    <a asp-action="Delete" asp-route-productId="@item.Id" class="btn btn-outline-danger js-delete">Delete</a>
                                 </td>
                             }
                             else
@@ -111,5 +111,11 @@
     </tbody>
 
 </table>
+
+@section Scripts
+{
+    @* set asp-append-version to make any changes immidiatly appear with out realoaed *@
+    <script src="~/js/productdelete.js" asp-append-version="true"></script>
+}
 
 
