@@ -38,7 +38,7 @@ namespace ProductCatalog.Services
                         var newProduct = model.Adapt<Product>();
                         newProduct.CreatedBy = userId;
                         newProduct.CreationDate = DateTime.Now;
-                        newProduct.Category=null;
+                        newProduct.Category=checkCategory;
 
                         await Add(newProduct);
 
@@ -91,7 +91,7 @@ namespace ProductCatalog.Services
                     var category = await _unitOfWork.CategoryServices.GetCategoryById((int)item.CategoryId);
 
                     data.CategoryName = category.Name;
-
+                    
                     var cratedByName = await _unitOfWork.UserResolverService.GetUserName(item.CreatedBy);
 
                     data.CreatedBy = cratedByName;
