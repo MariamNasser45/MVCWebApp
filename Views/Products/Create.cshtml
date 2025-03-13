@@ -21,7 +21,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" />
+                    <input min="1" asp-for="Price" class="form-control" />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="Duration" class="control-label"></label>
-                    <input asp-for="Duration" class="form-control" />
+                    <input min="1" asp-for="Duration" class="form-control" />
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
             </div>

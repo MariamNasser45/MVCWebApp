@@ -21,7 +21,9 @@ namespace ProductCatalog.Controllers
 
             ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
 
-            return View();
+            var allProducts = await _unitOfWork.ProductServices.GetAllProducts();
+
+            return View(allProducts.ProductData);
         }
 
         [HttpPost]

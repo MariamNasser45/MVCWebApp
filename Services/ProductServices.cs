@@ -37,6 +37,7 @@ namespace ProductCatalog.Services
                         var newProduct = model.Adapt<Product>();
                         newProduct.CreatedBy = userId;
                         newProduct.CreationDate = DateTime.Now;
+                        newProduct.Category=null;
 
                         await Add(newProduct);
 
@@ -64,7 +65,9 @@ namespace ProductCatalog.Services
 
             var allProducts = await GetAllWithData();
 
-            var userProducts = allProducts.Where(i => i.StartDate.Date.AddDays(i.Duration)<=DateTime.Now.Date);
+            var userProducts = allProducts.Where(c => DateTime.Now >= c.StartDate
+                                                && DateTime.Now <= c.StartDate.AddDays(c.Duration)
+                                                && Math.Abs(DateTime.Now.Day - c.StartDate.AddDays(c.Duration).Day) <= (c.Duration));
 
             var lstToAddUserData = new List<ProductDataViewModel>();
 
