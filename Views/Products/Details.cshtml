@@ -1,0 +1,86 @@
+﻿@model ProductDataViewModel;
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container card border-success mt-5 overflow-hidden">
+    <div class="card-body p-0">
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Name</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.Name</h5>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Price</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.Price</h5>
+            </div>
+
+        </div>
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Category</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.CategoryName</h5>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Start Date</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.StartDate</h5>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Duration In Days</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.Duration</h5>
+            </div>
+
+        </div>
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Created By</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.CreatedBy</h5>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-start align-items-center align-content-center">
+            <div class="col-4">
+                <h4>Created At</h4>
+            </div>
+
+            <div class="col-5">
+                <h5>@Model.CreationDate</h5>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+ 
+<a asp-action="Index" class="btn btn-outline-dark ms-lg-2 mt-3">Back to List</a>

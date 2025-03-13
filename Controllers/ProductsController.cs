@@ -125,5 +125,20 @@ namespace ProductCatalog.Controllers
                     return BadRequest(result.Messege);
             }
         }
+
+        [HttpGet]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> Details(int productId)
+        {
+            var product = await _unitOfWork.ProductServices.GetProductById(productId);
+
+            if(product.Messege==string.Empty && product.Product!=null)
+            {
+                return View(product.Product);
+            }
+            else
+                return BadRequest(product.Messege);
+
+        }
     }
 }
