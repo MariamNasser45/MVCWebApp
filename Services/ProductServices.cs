@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
@@ -59,7 +60,7 @@ namespace ProductCatalog.Services
             return output;
         }
 
-        public async Task<ReturnListOfProductViewModel> GetAllProducts()
+        public async Task<ReturnListOfProductViewModel> GetAllProducts(int? categoryId)
         {
             var output = new ReturnListOfProductViewModel();
 
@@ -80,13 +81,16 @@ namespace ProductCatalog.Services
                     var data = new ProductDataViewModel
                     {
                         Name = item.Name,
-                        CategoryName = item.Category!=null ? item.Category.Name : "",
-                        CategoryId = item.Category!=null ? item.Category.Id : 0,
+                        CategoryId =(int) item.CategoryId,
                         Price =item.Price,
                         CreationDate = item.CreationDate,
                         StartDate = item.StartDate,
                         Duration = item.Duration,
                     };
+
+                    var category = await _unitOfWork.CategoryServices.GetCategoryById((int)item.CategoryId);
+
+                    data.CategoryName = category.Name;
 
                     var cratedByName = await _unitOfWork.UserResolverService.GetUserName(item.CreatedBy);
 
@@ -109,13 +113,16 @@ namespace ProductCatalog.Services
                         var data = new ProductDataViewModel
                         {
                             Name = item.Name,
-                            CategoryName = item.Category!=null ? item.Category.Name : "",
-                            CategoryId = item.Category!=null ? item.Category.Id : 0,
+                            CategoryId =(int) item.CategoryId,
                             Price =item.Price,
                             CreationDate = item.CreationDate,
                             StartDate = item.StartDate,
                             Duration = item.Duration,
                         };
+
+                        var category = await _unitOfWork.CategoryServices.GetCategoryById((int)item.CategoryId);
+
+                        data.CategoryName = category.Name;
 
                         var cratedByName = await _unitOfWork.UserResolverService.GetUserName(item.CreatedBy);
 
@@ -124,16 +131,41 @@ namespace ProductCatalog.Services
                         lstToAddAdminData.Add(data);
                     }
 
+                    if (categoryId!=null)
+                    {
+                        if (categoryId!=0)
+                        {
+                            lstToAddAdminData = lstToAddAdminData.Where(i => i.CategoryId==categoryId).ToList();
+                        }
+                    }
+
                     output.ProductData = lstToAddAdminData;
 
                 }
                 else
                 {
+                    if (categoryId!=null)
+                    {
+                        if (categoryId!=0)
+                        {
+                            lstToAddUserData = lstToAddUserData.Where(i => i.CategoryId==categoryId).ToList();
+                        }
+                    }
+
                     output.ProductData = lstToAddUserData;
                 }
             }
             else
+            {
+                if (categoryId!=null)
+                {
+                    if (categoryId!=0)
+                    {
+                        lstToAddUserData = lstToAddUserData.Where(i => i.CategoryId==categoryId).ToList();
+                    }
+                }
                 output.ProductData = lstToAddUserData;
+            }
 
             return output;
         }

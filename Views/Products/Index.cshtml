@@ -11,7 +11,7 @@
         {
             <select class="form-select-color:black w-50 mt-3 mb-3" name="CategoryID">
 
-                <option value="0"></option>
+                <option value="0">All</option>
                 @foreach (var item in ViewBag.CategoryList)
                 {
                     <option value="@item.Value">
@@ -54,12 +54,9 @@
             <th>
                 <label asp-for="First().Duration"></label>
             </th>
-            @{
-                // if (User.IsInRole("Admin"))
-                // {
-                // }
-                    <th></th>
-            }
+
+            <th></th>
+
         </tr>
     </thead>
 

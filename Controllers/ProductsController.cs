@@ -21,7 +21,7 @@ namespace ProductCatalog.Controllers
 
             ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
 
-            var allProducts = await _unitOfWork.ProductServices.GetAllProducts();
+            var allProducts = await _unitOfWork.ProductServices.GetAllProducts(null);
 
             return View(allProducts.ProductData);
         }
@@ -33,7 +33,9 @@ namespace ProductCatalog.Controllers
 
             ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
 
-            return View();
+            var allProducts = await _unitOfWork.ProductServices.GetAllProducts(categoryId);
+
+            return View(allProducts.ProductData);
         }
 
 
