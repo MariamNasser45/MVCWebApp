@@ -24,6 +24,11 @@ namespace ProductCatalog.Services
                 return categories;
             return new List<SelectListItem>();
         }
+
+        public async Task<Category> GetCategoryById(int id)
+        {
+            return await _context.Categories.SingleOrDefaultAsync(i => i.Id==id);
+        }
     }
 
 }

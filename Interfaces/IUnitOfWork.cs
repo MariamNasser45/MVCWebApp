@@ -6,5 +6,6 @@ namespace ProductCatalog.Interfaces
     {
         IProductServices ProductServices { get; }
         ICategoryServices CategoryServices { get; }
+        IUserResolverService UserResolverService { get; }
     }
 }

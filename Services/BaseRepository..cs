@@ -77,7 +77,7 @@ namespace ProductCatalog.Services
         }
         public async Task<IEnumerable<T>> GetAll()
         {
-            var entities = await _context.Set<T>().ToListAsync();
+            var entities = await _context.Set<T>().AsNoTracking().ToListAsync();
 
             if (entities.Count()==0)
                 return null;
@@ -107,6 +107,12 @@ namespace ProductCatalog.Services
             return entity;
 
         }
+
+        public async Task<int> CommitChanges()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
 
     }
 }

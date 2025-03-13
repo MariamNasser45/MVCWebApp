@@ -17,6 +17,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserResolverService, UserResolverService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

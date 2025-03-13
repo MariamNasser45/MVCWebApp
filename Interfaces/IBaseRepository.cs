@@ -9,5 +9,6 @@
         Task<IEnumerable<T>> GetAllWithData();
         Task<T> FindById(int id);
         Task<T> FindByIdWithData(int id);
+        Task<int> CommitChanges();
     }
 }
