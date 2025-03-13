@@ -1,4 +1,35 @@
 ﻿@model IEnumerable<Product>
+
 @{
     ViewData["Title"] = "All Products";
 }
+
+<form asp-controller="Products" method="post" asp-action="Index" class="d-flex justify-content-center">
+
+   @{
+        if (ViewBag.CategoryList!=null)
+        {
+            <select class="form-select-color:black w-50 mt-3 mb-3" name="CategoryID">
+
+                <option value="0"></option>
+                @foreach (var item in ViewBag.CategoryList)
+                {
+                    <option value="@item.Value">
+                        @item.Text
+                    </option>
+                }
+            </select>
+        }
+   }
+
+    <input type="submit" class="btn btn-outline-dark mb-3 mt-3" style="margin-left:4px" value="Go" />
+    @{
+        if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="btn btn-outline-dark mb-3 mt-3" style="margin-left:4px">Create New</a>
+        }
+    }
+
+</form>
+
+

@@ -15,12 +15,28 @@ namespace ProductCatalog.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
+
+            ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
+
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int categoryId)
+        {
+
+            ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
+
+            return View();
+        }
+
+
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             CreateProductViewModel viewModel = new CreateProductViewModel()
@@ -33,7 +49,7 @@ namespace ProductCatalog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateProductViewModel model)
         {
             if (!ModelState.IsValid)
