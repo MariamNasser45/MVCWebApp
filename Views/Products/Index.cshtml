@@ -92,7 +92,7 @@
                                 <td>
                                     <a asp-action="Details" asp-route-productId="@item.Id" class="btn btn-outline-info">Details</a>
                                     <a asp-action="Update" asp-route-productId="@item.Id" class="btn btn-outline-warning">Edit</a>
-                                    <a asp-action="Delete" asp-route-productId="@item.Id" class="btn btn-outline-danger js-delete">Delete</a>
+                                    <a class="btn btn-outline-danger js-delete" data-id ="@item.Id">Delete</a>
                                 </td>
                             }
                             else

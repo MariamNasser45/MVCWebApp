@@ -142,9 +142,9 @@ namespace ProductCatalog.Controllers
         }
 
         [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> Delete(int productId)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = await _unitOfWork.ProductServices.DeleteProduct(productId);
+            var result = await _unitOfWork.ProductServices.DeleteProduct(id);
 
             if (result == string.Empty)
                 return Ok("Product Deleted Succesfully");
