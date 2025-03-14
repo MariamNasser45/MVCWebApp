@@ -60,7 +60,7 @@ namespace ProductCatalog.Services
                         output = "Invalid Category";
                 }
                 else
-                    output = "UnAuthorized";
+                    output = "Access Denied, Contact with administrator";
             }
             else
                 output = "Please Login Firstly";
@@ -253,7 +253,7 @@ namespace ProductCatalog.Services
                         return "Invalid Product";
                 }
                 else
-                    return "UnAuthorized";
+                    return "Access Denied, Contact with administrator";
 
             }
             else
@@ -325,7 +325,7 @@ namespace ProductCatalog.Services
                         output.Messege = "Invalid Product";
                 }
                 else
-                    output.Messege = "UnAuthorized";
+                    output.Messege = "Access Denied, Contact with administrator";
 
             }
             else

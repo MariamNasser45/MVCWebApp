@@ -98,8 +98,13 @@ namespace ProductCatalog.Controllers
                 };
                 return View(viewModel);
             }
+            else
+            {
+                //Use TempData to pass data from view to othe
+                TempData["Error Messege"] = result.Messege;
 
-            return BadRequest(result.Messege);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         [HttpPost]
@@ -122,7 +127,13 @@ namespace ProductCatalog.Controllers
                 if (result.Messege == string.Empty)
                     return RedirectToAction(nameof(Index));
                 else
-                    return BadRequest(result.Messege);
+                {
+                    TempData["Error Messege"] = result.Messege;
+
+
+                    return RedirectToAction("Error", "Home");
+                }
+                    
             }
         }
 
@@ -137,7 +148,12 @@ namespace ProductCatalog.Controllers
                 return View(product.Product);
             }
             else
-                return BadRequest(product.Messege);
+            {
+                TempData["Error Messege"] = product.Messege;
+
+
+                return RedirectToAction("Error", "Home");
+            }
 
         }
 
@@ -148,8 +164,13 @@ namespace ProductCatalog.Controllers
 
             if (result == string.Empty)
                 return Ok("Product Deleted Succesfully");
+            else
+            {
+                TempData["Error Messege"] = result;
 
-            return BadRequest(result);
+
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }
