@@ -46,14 +46,26 @@ namespace ProductCatalog.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(bool asUser)
         {
-            CreateProductViewModel viewModel = new CreateProductViewModel()
+            if(!asUser)
             {
-                Category = await _unitOfWork.CategoryServices.GetAllCategories()
-            };
+                CreateProductViewModel viewModel = new CreateProductViewModel()
+                {
+                    Category = await _unitOfWork.CategoryServices.GetAllCategories()
+                };
 
-            return View(viewModel);
+                return View(viewModel);
+
+            }
+            else
+            {
+                //Use TempData to pass data from view to othe
+                TempData["Error Messege"] = "Access Denied, Contact with administrator";
+
+                return RedirectToAction("Error", "Home");
+            }
+
         }
 
         [HttpPost]
@@ -83,33 +95,43 @@ namespace ProductCatalog.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Update(int productId)
+        public async Task<IActionResult> Update(int productId , bool asUser)
         {
-            var result = await _unitOfWork.ProductServices.GetProductById(productId);
-
-            if (result.Messege == string.Empty && result.Product != null)
+            if(!asUser)
             {
+                var result = await _unitOfWork.ProductServices.GetProductById(productId);
 
-                UpdateProductViewModel viewModel = new UpdateProductViewModel
+                if (result.Messege == string.Empty && result.Product != null)
                 {
-                    Name = result.Product.Name,
-                    Price = result.Product.Price,
-                    StartDate = result.Product.StartDate,
-                    Duration = result.Product.Duration,
-                    CategoryId = result.Product.CategoryId,
-                    Category = await _unitOfWork.CategoryServices.GetAllCategories(),
-                    Id = result.Product.Id
 
-                };
-                return View(viewModel);
+                    UpdateProductViewModel viewModel = new UpdateProductViewModel
+                    {
+                        Name = result.Product.Name,
+                        Price = result.Product.Price,
+                        StartDate = result.Product.StartDate,
+                        Duration = result.Product.Duration,
+                        CategoryId = result.Product.CategoryId,
+                        Category = await _unitOfWork.CategoryServices.GetAllCategories(),
+                        Id = result.Product.Id
+
+                    };
+                    return View(viewModel);
+                }
+                else
+                {
+                    //Use TempData to pass data from view to othe
+                    TempData["Error Messege"] = result.Messege;
+
+                    return RedirectToAction("Error", "Home");
+                }
             }
             else
             {
-                //Use TempData to pass data from view to othe
-                TempData["Error Messege"] = result.Messege;
+                TempData["Error Messege"] = "Access Denied, Contact with administrator";
 
                 return RedirectToAction("Error", "Home");
             }
+           
         }
 
         [HttpPost]
