@@ -22,9 +22,9 @@
         }
    }
 
-    <input type="submit" class="btn btn-outline-dark mb-3 mt-3" style="margin-left:4px" value="Go" />
+    <input type="submit" class="btn btn-outline-dark mb-3 mt-3" asp-route-asUser="@ViewData["As User"]" style="margin-left:4px" value="Go" />
     @{
-        if (User.IsInRole("Admin"))
+        if (User.IsInRole("Admin") && ViewData["As User"]==false.ToString())
         {
             <a asp-action="Create" class="btn btn-outline-dark mb-3 mt-3" style="margin-left:4px">Create New</a>
         }
@@ -87,7 +87,7 @@
                             <p>@item.Duration</p>
                         </td>
                         @{
-                            if (User.IsInRole("Admin"))
+                            if (User.IsInRole("Admin") && ViewData["As User"]==false.ToString())
                             {
                                 <td>
                                     <a asp-action="Details" asp-route-productId="@item.Id" class="btn btn-outline-info">Details</a>
@@ -98,7 +98,7 @@
                             else
                             {
                                 <td>
-                                    <a asp-action="Details" asp-route-productId="@item.Id" class="btn btn-outline-info">Details</a>
+                                    <a asp-action="Details" asp-route-productId="@item.Id"  class="btn btn-outline-info" asp-route-asUser = "@ViewData["As User"]">Details</a>
                                 </td>
                             }
                         }

@@ -13,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(
     option => option.UseSqlServer(connectionString));
 
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 

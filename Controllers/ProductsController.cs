@@ -16,24 +16,29 @@ namespace ProductCatalog.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool asUser)
         {
 
             ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
 
-            var allProducts = await _unitOfWork.ProductServices.GetAllProducts(null);
+            var allProducts = await _unitOfWork.ProductServices.GetAllProducts(null,asUser);
+
+            ViewData["As User"] = asUser.ToString();
+
 
             return View(allProducts.ProductData);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int categoryId)
+        public async Task<IActionResult> Index(int categoryId , bool asUser)
         {
 
             ViewBag.CategoryList = await _unitOfWork.CategoryServices.GetAllCategories();
 
-            var allProducts = await _unitOfWork.ProductServices.GetAllProducts(categoryId);
+            ViewData["As User"] = asUser.ToString();
+
+            var allProducts = await _unitOfWork.ProductServices.GetAllProducts(categoryId,asUser);
 
             return View(allProducts.ProductData);
         }
@@ -138,10 +143,11 @@ namespace ProductCatalog.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> Details(int productId)
+        public async Task<IActionResult> Details(int productId , bool asUser)
         {
             var product = await _unitOfWork.ProductServices.GetProductById(productId);
+
+            ViewData["As User"] = asUser.ToString();
 
             if(product.Messege==string.Empty && product.Product!=null)
             {

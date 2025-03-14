@@ -83,4 +83,12 @@
     </div>
 </div>
  
-<a asp-action="Index" class="btn btn-outline-dark ms-lg-2 mt-3">Back to List</a>
+
+<a asp-action="Index" class="btn btn-outline-dark ms-lg-2 mt-3" asp-route-asUser="@ViewData["As User"]">Back to List</a>
+@{
+    if(User.IsInRole("Admin") && ViewData["As User"] == false.ToString())
+    {
+        <a asp-action="Update" asp-route-productId="@Model.Id" class="btn btn-outline-dark ms-lg-2 mt-3">Edit</a>
+    }
+}
+

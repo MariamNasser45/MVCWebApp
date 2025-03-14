@@ -68,7 +68,7 @@ namespace ProductCatalog.Services
             return output;
         }
 
-        public async Task<ReturnListOfProductViewModel> GetAllProducts(int? categoryId)
+        public async Task<ReturnListOfProductViewModel> GetAllProducts(int? categoryId , bool asUser)
         {
             var output = new ReturnListOfProductViewModel();
 
@@ -117,39 +117,54 @@ namespace ProductCatalog.Services
 
                 if (checkRole)
                 {
-                    foreach (var item in allProducts)
+                    if(!asUser)
                     {
-                        var data = new ProductDataViewModel
+                        foreach (var item in allProducts)
                         {
-                            Id = item.Id,
-                            Name = item.Name,
-                            CategoryId =item.CategoryId,
-                            Price =item.Price,
-                            CreationDate = item.CreationDate,
-                            StartDate = item.StartDate,
-                            Duration = item.Duration,
-                        };
+                            var data = new ProductDataViewModel
+                            {
+                                Id = item.Id,
+                                Name = item.Name,
+                                CategoryId = item.CategoryId,
+                                Price = item.Price,
+                                CreationDate = item.CreationDate,
+                                StartDate = item.StartDate,
+                                Duration = item.Duration,
+                            };
 
-                        var category = await _unitOfWork.CategoryServices.GetCategoryById((int)item.CategoryId);
+                            var category = await _unitOfWork.CategoryServices.GetCategoryById((int)item.CategoryId);
 
-                        data.CategoryName = category.Name;
+                            data.CategoryName = category.Name;
 
-                        var cratedByName = await _unitOfWork.UserResolverService.GetUserName(item.CreatedBy);
+                            var cratedByName = await _unitOfWork.UserResolverService.GetUserName(item.CreatedBy);
 
-                        data.CreatedBy = cratedByName;
+                            data.CreatedBy = cratedByName;
 
-                        lstToAddAdminData.Add(data);
-                    }
-
-                    if (categoryId!=null)
-                    {
-                        if (categoryId!=0)
-                        {
-                            lstToAddAdminData = lstToAddAdminData.Where(i => i.CategoryId==categoryId).ToList();
+                            lstToAddAdminData.Add(data);
                         }
-                    }
 
-                    output.ProductData = lstToAddAdminData;
+                        if (categoryId != null)
+                        {
+                            if (categoryId != 0)
+                            {
+                                lstToAddAdminData = lstToAddAdminData.Where(i => i.CategoryId == categoryId).ToList();
+                            }
+                        }
+
+                        output.ProductData = lstToAddAdminData;
+                    }
+                    else
+                    {
+                        if (categoryId != null)
+                        {
+                            if (categoryId != 0)
+                            {
+                                lstToAddUserData = lstToAddUserData.Where(i => i.CategoryId == categoryId).ToList();
+                            }
+                        }
+
+                        output.ProductData = lstToAddUserData;
+                    }
 
                 }
                 else

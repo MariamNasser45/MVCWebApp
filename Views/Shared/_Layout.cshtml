@@ -22,7 +22,7 @@
                 @{
                     if(User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-outline-light" asp-area="" asp-controller="Products" asp-action="Index">Admin As Client</a>
+                        <a class="btn btn-outline-light" asp-area="" asp-route-asUser="@true" asp-controller="Products" asp-action="Index">Admin As Client</a>
                     }
 
                 }
